@@ -7,6 +7,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.whatsappui.data.INITIAL_SCREEN_INDEX
 import com.example.whatsappui.data.tabs
 import com.example.whatsappui.ui.theme.TabsComponent
@@ -15,7 +17,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(openConversation: () -> Unit = {}) {
+fun HomeScreen(navController: NavController) {
     val pagerState = rememberPagerState(pageCount = { tabs.size },initialPage = INITIAL_SCREEN_INDEX)
     val scope = rememberCoroutineScope()
 
@@ -37,7 +39,7 @@ fun HomeScreen(openConversation: () -> Unit = {}) {
             state = pagerState,
         ) { page ->
             when (page) {
-                0 -> ChatScreen(openConversation = openConversation)
+                0 -> ChatScreen(navController= navController)
                 1 -> StatusScreen()
                 2 -> CallsScreen()
                 else -> {}
@@ -49,5 +51,6 @@ fun HomeScreen(openConversation: () -> Unit = {}) {
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }

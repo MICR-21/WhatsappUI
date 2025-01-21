@@ -14,7 +14,7 @@ import com.example.whatsappui.domain.CallDataObject
 import com.example.whatsappui.ui.theme.components.UserImage  // Assume you have a UserImage component
 
 @Composable
-fun CallsScreen() {
+fun CallsScreen(openCall: () -> Unit = {}) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
