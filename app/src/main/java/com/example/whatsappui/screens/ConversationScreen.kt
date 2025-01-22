@@ -18,7 +18,7 @@ import com.example.whatsappui.data.chatsList
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun ConversationScreen(navController: NavController, chatId: Int) {
-        if (chatId != null && chatId > 0){
+
             val chatData = chatsList.find { it.chatId == chatId}
             Scaffold(
                 topBar = {
@@ -40,14 +40,11 @@ import com.example.whatsappui.data.chatsList
                 ){
 
                     Text(text = chatData?.message?.content ?: "No message available")
-
                 }
             }
-
-        }else{
-            Text("Invalid chat ID")
         }
-    }
+
+
     @Preview
     @Composable
     fun ConversationScreenPreview() {

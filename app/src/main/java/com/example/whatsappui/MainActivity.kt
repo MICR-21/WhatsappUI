@@ -29,13 +29,14 @@ class MainActivity : ComponentActivity() {
                       composable(Screen.Home.name){
                           HomeScreen(
                               navController = navController
-
                           )
 
                       }
                       composable("conversation/{chatId}"){ backStackEntry ->
-                        val chatId = backStackEntry.arguments?.getInt("chatId")
-                          ConversationScreen(navController = navController, chatId = chatId ?: -1)
+                        val chatId = backStackEntry.arguments?.getString("chatId")?.toIntOrNull()
+                          if (chatId != null) {
+                              ConversationScreen(navController = navController, chatId = chatId)
+                          }
 
                       }
                   }
